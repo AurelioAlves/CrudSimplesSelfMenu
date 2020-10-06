@@ -19,7 +19,7 @@
                 <g:formRemote id="formVenda" name="formVenda" url="[controller: 'venda', action: 'salvar']" onSuccess="retornoSalvarVenda(data)">
                     Garçom: <g:select optionKey="id" from="${Garcom.list()}" optionValue="${{it.nome}}" name="garcom"/>
                     <input type="hidden" name="id" value="" />
-                    Produto: <g:select optionKey="id" from="${Produto.list()}" optionValue="${{it.nome}}" name="produto"/>
+                    Produto: <g:select optionKey="id" from="${Produto.findAllByStatus("ATIVO")}" optionValue="${{it.nome}}" name="produto"/>
                     <input type="submit" name="salvar" value="Salvar" />
                 </g:formRemote>
             </div>

@@ -9,7 +9,7 @@
             <td>${venda.garcom.nome}</td>
             <td>${venda.produto.nome}</td>
             <td style="width: 10%" > <a href="javascript: alterarVenda(${venda.id}, ${venda.garcom.id}, ${venda.produto.id})"> Alterar </a> </td>
-            <td style="width: 10%" > <a href="javascript: excluirVenda(${venda.id})"> Excluir </a> </td>
+            <td style="width: 10%" > <a href="javascript: excluirVenda(${venda.id}, ${venda.garcom.id}, ${venda.produto.id})"> Excluir </a> </td>
         </tr>
     </g:each>
 </table>

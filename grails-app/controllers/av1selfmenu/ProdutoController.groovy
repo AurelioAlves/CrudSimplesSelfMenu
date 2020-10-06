@@ -49,4 +49,42 @@ class ProdutoController extends CrudController {
             antigo.first().save(flush: true)
         }
     }
+
+    def ativar() {
+        def retorno = [:]
+        try{
+            Produto produtoAtivar = Produto.get(params.id)
+            Produto produtoAtivo = Produto.findByStatusAndCodigo( "ATIVO", produtoAtivar.codigo )
+
+
+            if(produtoAtivo) {
+                produtoAtivo.status = "INATIVO"
+                produtoAtivo.save(flush: true)
+            }
+            produtoAtivar.status = "ATIVO"
+
+            produtoAtivar.save(flush: true)
+
+            retorno.put("mensagem", "OK")
+        } catch ( Exception ex ) {
+            retorno.put("mensagem", "ERROR")
+        }
+
+        render retorno as JSON
+    }
+
+    def desativar() {
+        def retorno = [:]
+        try {
+            Produto produto = Produto.get(params.id)
+            produto.status = "INATIVO"
+
+            produto.save(flush: true)
+            retorno.put("mensagem", "OK")
+        } catch (Exception ex) {
+            retorno.put("mensagem", "ERROR")
+        }
+
+        render retorno as JSON
+    }
 }

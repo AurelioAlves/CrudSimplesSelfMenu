@@ -22,6 +22,7 @@
     </head>
     <body>
     <div id="divProdutos">
+        <a href="restaurar.gsp"> Restaurar </a>
         <div id="formProduto">
             <div id="divMensagemProduto"></div>
             <g:formRemote id="formProduto" name="formProduto" url="[controller: 'produto', action:'salvar']" onSuccess="retornoSalvarProduto(data)">

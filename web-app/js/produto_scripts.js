@@ -12,7 +12,6 @@ function carregarListaProduto() {
         url: "listar",
         data: data,
         success: function( data ) {
-            console.log(data)
             $("#divListarProduto").html( data )
         }
     })
@@ -23,6 +22,7 @@ function retornoSalvarProduto( data ) {
         $("#divMensagemProduto").html("Banda Salva com Sucesso");
         $("#formProduto input[name=nome]").val("");
         $("#formProduto input[name=preco]").val("");
+        $("#formProduto input[name=codigo]").val("");
         $("#formProduto input[name=id]").val("");
         carregarListaProduto()
     } else {
@@ -53,18 +53,42 @@ function alterarProduto( id, nome, preco ) {
         url: "buscar",
         data: {"id": id, "nome": nome, "preco": preco},
         success: function( data ) {
-            console.log(data);
             $("#formProduto input[name=nome]").val(data.entity.nome);
             $("#formProduto input[name=id]").val(data.entity.id);
             $("#formProduto input[name=preco]").val(data.entity.preco);
+            $("#formProduto input[name=codigo]").val(data.entity.codigo);
         }
     })
 }
 
-function ativarProduto() {
-
+function ativarProduto( id ) {
+    $.ajax( {
+        method: "POST",
+        url: "ativar",
+        data: {"id": id },
+        success: function( data ) {
+            if(data.mensagem == "OK") {
+                $("#divMensagemProduto").html("Produto ativado!");
+                carregarListaProduto()
+            } else {
+                $("#divMensagemProduto").html( "Não foi possivel ativar")
+            }
+        }
+    })
 }
 
-function desativarProduto() {
-    
+function desativarProduto( id ) {
+    $.ajax( {
+        method: "POST",
+        url: "desativar",
+        data: { "id": id},
+        success: function( data ) {
+            if(data.mensagem == "OK") {
+                $("#divMensagemProduto").html("Produto Inativado!");
+                carregarListaProduto()
+            } else {
+                $("#divMensagemProduto").html("Não foi possivel desativar")
+            }
+        }
+    })
 }

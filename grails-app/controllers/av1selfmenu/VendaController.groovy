@@ -34,4 +34,16 @@ class VendaController extends CrudController {
 
         return venda
     }
+
+    @Override
+    def afterSave( def venda ) {
+        venda.garcom.qtdVendas += 1
+        venda.garcom.save( flush: true )
+    }
+
+    @Override
+    def beforeDelete( def venda ) {
+        venda.garcom.qtdVendas -= 1
+        venda.garcom.save( flush: true )
+    }
 }

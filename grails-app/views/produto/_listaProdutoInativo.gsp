@@ -10,7 +10,7 @@
             <td>${produto.nome}</td>
             <td>${produto.preco}</td>
             <td>${produto.versao}</td>
-            <td style="width: 10%" > <a href="javascript: alterarProduto(${produto.id}, '${produto.nome}', '${produto.preco}' )"> Ativar </a> </td>
+            <td style="width: 10%" > <a href="javascript: ativarProduto(${produto.id})"> Ativar </a> </td>
             <td style="width: 10%" > <a href="javascript: excluirProduto(${produto.id})"> Excluir </a> </td>
         </tr>
     </g:each>

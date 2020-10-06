@@ -24,12 +24,12 @@ function retornoSalvarVenda( data ) {
     }
 }
 
-function excluirVenda( id ) {
+function excluirVenda( id, garcom, produto ) {
     if(confirm("Deseja realmente excluir essa Venda ?")) {
         $.ajax( {
             method: "POST",
             url: "excluir",
-            data: {"id": id},
+            data: {"id": id, "garcom": garcom, "produto":produto},
             success: function( data ) {
                 if(data.mensagem == "OK") {
                     carregarListaVenda()

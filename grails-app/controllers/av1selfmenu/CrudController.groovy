@@ -8,13 +8,18 @@ class CrudController {
 
     def beforeSave( def entityInstance) { }
 
+    def beforeDelete( def entityInstance ) { }
+
     def afterSave(def entityInstance) { }
+
+    def afterDelete( def entityInstance ) { }
 
     def salvar() {
         def retorno = [:]
         def entityInstance = getEntityInstance()
 
         beforeSave( entityInstance )
+
         entityInstance.validate()
         if(!entityInstance.hasErrors()) {
             entityInstance.save(flush: true, failOnError: true)
@@ -32,12 +37,16 @@ class CrudController {
         def retorno = [:]
         def entityInstance = getEntityInstance()
 
+        beforeDelete( entityInstance )
+
         try {
             entityInstance.delete(flush: true)
             retorno["mensagem"] = "OK"
         } catch( Exception ex ) {
             retorno["mensagem"] = "ERROR"
         }
+
+        afterDelete( entityInstance )
 
         render retorno as JSON
     }
